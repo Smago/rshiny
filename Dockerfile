@@ -18,6 +18,7 @@ RUN apt-get update && apt-get install -y -t unstable \
     gdebi -n ss-latest.deb && \
     rm -f version.txt ss-latest.deb && \
     R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.com/')" && \
+    rm -Rf /srv/shiny-server/ && \
     git clone https://github.com/Smago/rshiny.git /srv/shiny-server/ && \
     rm -rf /var/lib/apt/lists/*
 # cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
