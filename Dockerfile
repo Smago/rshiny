@@ -1,6 +1,8 @@
 FROM r-base:latest
 
-MAINTAINER Winston Chang "winston@rstudio.com"
+MAINTAINER Matthieu ROSSI "matthieu.rossi.avanade@axa-techc.com"
+
+ARG SourceAppRepo_URL
 
 # Install dependencies and Download and install shiny server
 RUN apt-get update && apt-get install -y -t unstable \
@@ -19,13 +21,14 @@ RUN apt-get update && apt-get install -y -t unstable \
     rm -f version.txt ss-latest.deb && \
     R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.com/')" && \
     rm -Rf /srv/shiny-server/ && \
-    git clone https://github.com/Smago/rshiny.git /srv/shiny-server/ && \
+    git clone "$SourceAppRepo_URL" /srv/shiny-server/ && \
     rm -rf /var/lib/apt/lists/*
-# cp -R /usr/local/lib/R/site-library/shiny/examples/* /srv/shiny-server/ && \
+
 EXPOSE 3838
 
 COPY shiny-server.sh /usr/bin/shiny-server.sh
 
+# RUN chown -R shiny:0 /etc/shiny-server /var/log/shiny-server /var/lib/shiny-server
 RUN chmod +x /usr/bin/shiny-server.sh
 
 CMD ["/usr/bin/shiny-server.sh"]
