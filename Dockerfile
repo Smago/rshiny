@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y -t unstable \
     rm -f version.txt ss-latest.deb && \
     R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.com/')" && \
     rm -Rf /srv/shiny-server/ && \
-    git clone env:$SourceAppRepo_URL /srv/shiny-server/ &&\
+    git clone ${SourceAppRepo_URL} /srv/shiny-server/ &&\
     rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3838
