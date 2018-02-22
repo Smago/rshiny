@@ -24,7 +24,7 @@ EXPOSE 3838
 
 COPY shiny-server.sh /usr/bin/shiny-server.sh
 
-# RUN chown -R shiny:0 /etc/shiny-server /var/log/shiny-server /var/lib/shiny-server
+RUN chown -R shiny:0 /etc/shiny-server /var/log/shiny-server /var/lib/shiny-server
 RUN chmod +x /usr/bin/shiny-server.sh
 
 CMD ["/usr/bin/shiny-server.sh"]
