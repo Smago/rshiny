@@ -1,8 +1,6 @@
 FROM r-base:latest
 
-MAINTAINER Matthieu ROSSI "matthieu.rossi.avanade@axa-techc.com"
-
-ENV SourceAppRepo_URL="https://github.com/Smago/rshiny-samples.git"
+LABEL Matthieu ROSSI "matthieu.rossi.avanade@axa-techc.com"
 
 # Install dependencies and Download and install shiny server
 RUN apt-get update && apt-get install -y -t unstable \
@@ -20,8 +18,6 @@ RUN apt-get update && apt-get install -y -t unstable \
     gdebi -n ss-latest.deb && \
     rm -f version.txt ss-latest.deb && \
     R -e "install.packages(c('shiny', 'rmarkdown'), repos='https://cran.rstudio.com/')" && \
-    rm -Rf /srv/shiny-server/ && \
-    git clone ${SourceAppRepo_URL} /srv/shiny-server/ &&\
     rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3838
