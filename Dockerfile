@@ -1,6 +1,6 @@
 FROM r-base:latest
 
-LABEL smago
+LABEL Matthieu ROSSI "matthieu.rossi@avanade.com"
 
 # Install dependencies and Download and install shiny server
 RUN apt-get update && apt-get install -y -t unstable \
